@@ -5,6 +5,10 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.progress {
+    margin: 10px !important;
+}
+
 .progress-bar {
     background-color: var(--bs-green);
 }
