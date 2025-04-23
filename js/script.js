@@ -3,6 +3,17 @@ $(document).ready(() => {
     const target = $("#target");
     const properties = $("#editor-properties");
     
+    function update() {
+        const props = $(".editor-property");
+        const vals = $(".editor-value");
+
+        player.css({});
+
+        props.each((i) => {
+            player.css($(props[i]).val(), $(vals[i]).val());
+        });
+    }
+
     function addProperty(property, value) {
         let pEnd = "";
         let vEnd = "";
@@ -12,10 +23,6 @@ $(document).ready(() => {
 
         const propInp = $(`<input type="text" value="${property ?? ""}" class="editor-property" ${pEnd}>`);
         const valInp = $(`<input type="text" class="editor-value" value="${value ?? ""}" placeholder="..." ${vEnd}>`);
-
-        function update() {
-            player.css(propInp.val(), valInp.val());
-        }
 
         propInp.on("input propertychange", update);
         valInp.on("input propertychange", update);
