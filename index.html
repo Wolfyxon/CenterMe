@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>CenterMe - a CSS game</title>
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        
+        <script type="text/javascript" src="js/jquery-3.7.1.min.js" defer></script>
+        <script type="text/javascript" src="js/bootstrap.bundle.min.js" defer></script>
+        <script type="text/javascript" src="js/script.js" defer></script>
+    </head>
+    <body>
+        <h1>Center Me!</h1>
+
+        <div id="main">
+            <div id="area-container" class="container   ">
+                <div id="area">
+                    <div id="target"></div>
+                    <div id="player"></div>
+                </div>
+            </div>
+
+            <div class="progress" role="progressbar" id="progress">
+                <div class="progress-bar" style="width: 50%"></div>
+            </div>
+            
+            <div id="editor">
+                <span class="editor-selector">#player</span> { <br>
+                <div id="editor-properties">
+                    <div>
+                        <input type="text" value="margin" class="editor-property">:
+                        <input type="text" class="editor-value" placeholder="...">
+                    </div>
+                </div>
+                }
+
+            </div>
+        </div>
+    </body>
+</html>
