@@ -12,6 +12,16 @@ $(document).ready(() => {
         props.each((i) => {
             player.css($(props[i]).val(), $(vals[i]).val());
         });
+
+        const pRect = player[0].getBoundingClientRect();
+        const tRect = target[0].getBoundingClientRect();
+        
+        if(
+            pRect.left >= tRect.left && pRect.right <= tRect.right &&
+            pRect.top >= tRect.top && pRect.bottom <= tRect.bottom
+        ) {
+            console.log("yay");
+        }
     }
 
     function addProperty(property, value) {
