@@ -6,11 +6,14 @@ $(document).ready(() => {
     const editorsContainer = $("#editors");
     
     const areaRect = $("#area")[0].getBoundingClientRect();
-
-    let editors = [];
+    
+    const editors = [];
     
     const playerEditor = addEditor(player, "#player");
     const areaEditor = addEditor(area, "#area");
+
+    const levels = 2;
+    let currentLevel = 0;
 
     function update() {
         editors.forEach(applyEdits);
@@ -87,9 +90,35 @@ $(document).ready(() => {
         return editor;
     }
 
-    addProperty(playerEditor, "margin");
-    
-    target.css({
-        "margin": "0 auto"
-    });
+    function loadLevel(level) {
+        editors.forEach((e) => e.propContainer.empty());
+        target.css({});
+
+        currentLevel = level;
+
+        switch(level) {
+            case 1: {
+                addProperty(playerEditor, null, "0 auto");
+
+                target.css({
+                    "margin": "0 auto"
+                });
+
+                break;
+            }
+
+            case 2: {
+                addProperty(areaEditor, "display", "flex");
+                addProperty(areaEditor, null, "center");
+
+                target.css({
+                    "margin": "0 auto"
+                });
+                
+                break;
+            }
+        }
+    }
+
+    loadLevel(1);
 });
