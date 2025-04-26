@@ -81,8 +81,8 @@ $(document).ready(() => {
         if(property) pEnd = "disabled";
         if(value) vEnd = "disabled";
 
-        const propInp = $(`<input type="text" value="${property ?? ""}" class="editor-property" ${pEnd}>`);
-        const valInp = $(`<input type="text" class="editor-value" value="${value ?? ""}" placeholder="..." ${vEnd}>`);
+        const propInp = $(`<input type="text" value="${property ?? ""}" class="editor-property" placeholder="Property..." ${pEnd}>`);
+        const valInp = $(`<input type="text" class="editor-value" value="${value ?? ""}" placeholder="Value..." ${vEnd}>`);
 
         propInp.on("input propertychange", update);
         valInp.on("input propertychange", update);
