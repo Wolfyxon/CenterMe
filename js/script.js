@@ -20,11 +20,21 @@ $(document).ready(() => {
     let currentLevel = 0;
     let win = false;
 
+    function updatePlayer() {
+        const pRect = player[0].getBoundingClientRect();
+        
+        playerVis.css({
+            "left": pRect.left - areaRect.left,
+            "top": pRect.top - areaRect.top
+        });
+    }
+
     function update() {
         if(win) return;
 
         editors.forEach(applyEdits);
-
+        updatePlayer();
+        
         const pRect = player[0].getBoundingClientRect();
         const tRect = target[0].getBoundingClientRect();
         
@@ -153,6 +163,7 @@ $(document).ready(() => {
         }
 
         update();
+        updatePlayer();
     }
 
     function loadNextLevel() {
