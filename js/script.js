@@ -18,8 +18,11 @@ $(document).ready(() => {
 
     const levels = 2;
     let currentLevel = 0;
+    let win = false;
 
     function update() {
+        if(win) return;
+
         editors.forEach(applyEdits);
 
         const pRect = player[0].getBoundingClientRect();
@@ -34,7 +37,14 @@ $(document).ready(() => {
             pRect.left >= tRect.left && pRect.right <= tRect.right &&
             pRect.top >= tRect.top && pRect.bottom <= tRect.bottom
         ) {
-            console.log("yay");
+            win = true;
+            area.css("background-color", "var(--bs-green)");
+            
+            setTimeout(() => {
+                if(!loadNextLevel()) {
+                    win = false;
+                }
+            }, 1000);
         }
     }
 
@@ -42,10 +52,15 @@ $(document).ready(() => {
         const props = editor.propElements;
         const vals = editor.valElements;
 
-        editor.target.css({});
+        editor.target.removeAttr("style");
 
         props.forEach((prop, i) => {
-            editor.target.css(prop.val(), vals[i].val());
+            const val = vals[i];
+
+            if(!val || !val.val()) return;
+            if(!prop.val()) return;
+
+            editor.target.css(prop.val(), val.val());
         });
     }
 
@@ -95,14 +110,25 @@ $(document).ready(() => {
     }
 
     function loadLevel(level) {
-        editors.forEach((e) => e.propContainer.empty());
-        target.css({});
+        editors.forEach((e) => {
+            e.propContainer.empty();
+            e.propElements = [];
+            e.valElements = [];
+        });
+
+        area.css("background-color", "black");
+        
+        target.removeAttr("style");
+        player.removeAttr("style");
+        playerVis.removeAttr("style");
+        
+        win = false;
 
         levelDisp.text(`${level}/${levels}`);
         progressBar.css("width", `${(level / levels) * 100}%`);
-
+        
         currentLevel = level;
-
+        
         switch(level) {
             case 1: {
                 addProperty(playerEditor, null, "0 auto");
@@ -125,18 +151,31 @@ $(document).ready(() => {
                 break;
             }
         }
+
+        update();
+    }
+
+    function loadNextLevel() {
+        if(currentLevel < levels) {
+            loadLevel(currentLevel + 1);
+            return true;
+        }
+
+        return false;
     }
 
     $("#btn-prev-level").click(() => {
+        if(win) return;
+
         if(currentLevel > 1) {
             loadLevel(currentLevel - 1);
         }
     });
 
     $("#btn-next-level").click(() => {
-        if(currentLevel < levels) {
-            loadLevel(currentLevel + 1);
-        }
+        if(win) return;
+
+        loadNextLevel();
     });
 
     loadLevel(1);
