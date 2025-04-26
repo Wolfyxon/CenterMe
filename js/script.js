@@ -9,7 +9,7 @@ $(document).ready(() => {
 
     let editors = [];
     
-    const playerEditor = addEditor(playerVis, "#player");
+    const playerEditor = addEditor(player, "#player");
     const areaEditor = addEditor(area, "#area");
 
     function update() {
