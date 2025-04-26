@@ -127,6 +127,10 @@ body {
     border-width: 1px;
 }
 
+.comment {
+    color: var(--bs-gray);
+}
+
 .nav {
     margin: 0 auto;
     width: fit-content;

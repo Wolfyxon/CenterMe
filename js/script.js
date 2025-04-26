@@ -34,7 +34,7 @@ $(document).ready(() => {
 
         editors.forEach(applyEdits);
         updatePlayer();
-        
+
         const pRect = player[0].getBoundingClientRect();
         const tRect = target[0].getBoundingClientRect();
         
@@ -161,6 +161,12 @@ $(document).ready(() => {
                 break;
             }
         }
+
+        editors.forEach((e) => {
+            if(e.propElements.length == 0) {
+                e.propContainer.append($("<span class='comment'>/* Empty */</span>"));
+            }
+        });
 
         update();
         updatePlayer();
