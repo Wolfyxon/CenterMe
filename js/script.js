@@ -1,16 +1,20 @@
 $(document).ready(() => {
     const player = $("#player");
     const playerVis = $("#player-visual");
-    const target = $("#target");
-    const area = $("#area");
-    const editorsContainer = $("#editors");
     
+    const target = $("#target");
+
+    const area = $("#area");
     const areaRect = $("#area")[0].getBoundingClientRect();
     
+    const editorsContainer = $("#editors");
     const editors = [];
     
     const playerEditor = addEditor(player, "#player");
     const areaEditor = addEditor(area, "#area");
+
+    const levelDisp = $("#level-disp");
+    const progressBar = $(".progress-bar");
 
     const levels = 2;
     let currentLevel = 0;
@@ -94,6 +98,9 @@ $(document).ready(() => {
         editors.forEach((e) => e.propContainer.empty());
         target.css({});
 
+        levelDisp.text(`${level}/${levels}`);
+        progressBar.css("width", `${(level / levels) * 100}%`);
+
         currentLevel = level;
 
         switch(level) {
@@ -119,6 +126,18 @@ $(document).ready(() => {
             }
         }
     }
+
+    $("#btn-prev-level").click(() => {
+        if(currentLevel > 1) {
+            loadLevel(currentLevel - 1);
+        }
+    });
+
+    $("#btn-next-level").click(() => {
+        if(currentLevel < levels) {
+            loadLevel(currentLevel + 1);
+        }
+    });
 
     loadLevel(1);
 });
