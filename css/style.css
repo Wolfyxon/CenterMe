@@ -74,7 +74,7 @@ body {
     margin: 0 auto;
 }
 
-#editor {
+.editor {
     border-radius: 5px;
     padding: 5px;
     color: white;
@@ -84,7 +84,7 @@ body {
     text-align: left;
 }
 
-#editor-properties > * {
+.editor-properties > * {
     margin-left: 20px;
 }
 
@@ -100,14 +100,14 @@ body {
     color: white;
 }
 
-#editor-properties input {
+.editor-properties input {
     background: none;
     border: none;
     border-bottom: 1px solid var(--bs-dark);
     transition: 0.2s;
 }
 
-#editor-properties input:focus {
+.editor-properties input:focus {
     outline: none;
     border-color: white;
     border-width: 1px;

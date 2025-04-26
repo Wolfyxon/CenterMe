@@ -2,19 +2,18 @@ $(document).ready(() => {
     const player = $("#player");
     const playerVis = $("#player-visual");
     const target = $("#target");
-    const properties = $("#editor-properties");
+    const area = $("#area");
+    const editorsContainer = $("#editors");
     
     const areaRect = $("#area")[0].getBoundingClientRect();
 
+    let editors = [];
+    
+    const playerEditor = addEditor(playerVis, "#player");
+    const areaEditor = addEditor(area, "#area");
+
     function update() {
-        const props = $(".editor-property");
-        const vals = $(".editor-value");
-
-        player.css({});
-
-        props.each((i) => {
-            player.css($(props[i]).val(), $(vals[i]).val());
-        });
+        editors.forEach(applyEdits);
 
         const pRect = player[0].getBoundingClientRect();
         const tRect = target[0].getBoundingClientRect();
@@ -23,7 +22,7 @@ $(document).ready(() => {
             "left": pRect.left - areaRect.left,
             "top": pRect.top - areaRect.top
         });
-
+        
         if(
             pRect.left >= tRect.left && pRect.right <= tRect.right &&
             pRect.top >= tRect.top && pRect.bottom <= tRect.bottom
@@ -32,7 +31,18 @@ $(document).ready(() => {
         }
     }
 
-    function addProperty(property, value) {
+    function applyEdits(editor) {
+        const props = editor.propElements;
+        const vals = editor.valElements;
+
+        editor.target.css({});
+
+        props.forEach((prop, i) => {
+            editor.target.css(prop.val(), vals[i].val());
+        });
+    }
+
+    function addProperty(editor, property, value) {
         let pEnd = "";
         let vEnd = "";
 
@@ -44,14 +54,40 @@ $(document).ready(() => {
 
         propInp.on("input propertychange", update);
         valInp.on("input propertychange", update);
-        
-        properties.append(
+
+        editor.propElements.push(propInp);
+        editor.valElements.push(valInp);
+
+        editor.propContainer.append(
             $("<div></div>")
             .append(propInp, ":", valInp)
         );
     }
 
-    addProperty("margin");
+    function addEditor(target, dispSelector) {
+        const main = $(`
+            <div class="editor">
+                <span class="editor-selector">${dispSelector}</span> { <br>
+                <div class="editor-properties"></div>
+                }
+            </div>
+        `);
+        
+        const editor = {
+            target: target,
+            element: main,
+            propContainer: main.find(".editor-properties"),
+            propElements: [],
+            valElements: []
+        }
+
+        editorsContainer.append(main);
+        editors.push(editor);
+        
+        return editor;
+    }
+
+    addProperty(playerEditor, "margin");
 
     target.css({
         "margin": "0 auto"
