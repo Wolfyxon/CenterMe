@@ -66,7 +66,7 @@ $(document).ready(() => {
 
     function addEditor(target, dispSelector) {
         const main = $(`
-            <div class="editor">
+            <div class="editor" class="flex-fill">
                 <span class="editor-selector">${dispSelector}</span> { <br>
                 <div class="editor-properties"></div>
                 }
@@ -88,7 +88,7 @@ $(document).ready(() => {
     }
 
     addProperty(playerEditor, "margin");
-
+    
     target.css({
         "margin": "0 auto"
     });
