@@ -28,14 +28,20 @@ $(document).ready(() => {
             centerTarget();
         },
         () => {
+            addProperty(areaEditor, "display", "flex");
+            addProperty(areaEditor, "flex-direction", "column");
+            addProperty(playerEditor, null, "center");
+
+            centerTarget();
+        },
+        () => {
             addProperty(areaEditor, "display");
             addProperty(areaEditor, "place-items");
             
             target.css({
                 "margin": "auto"
             });
-
-        }
+        },
     ];
 
     let currentLevel = 0;
