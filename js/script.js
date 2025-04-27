@@ -29,7 +29,7 @@ $(document).ready(() => {
         },
         () => {
             addProperty(areaEditor, "display");
-            addProperty(areaEditor, "place-items", "center");
+            addProperty(areaEditor, "place-items");
             
             target.css({
                 "margin": "auto"
