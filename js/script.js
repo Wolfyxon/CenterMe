@@ -180,7 +180,7 @@ $(document).ready(() => {
     }
 
     function loadNextLevel() {
-        if(currentLevel < levels.length) {
+        if(currentLevel < levels.length - 1) {
             loadLevel(currentLevel + 1);
             return true;
         }
