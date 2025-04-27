@@ -16,9 +16,32 @@ $(document).ready(() => {
     const levelDisp = $("#level-disp");
     const progressBar = $(".progress-bar");
 
-    const levels = 3;
+    const levels = [
+        () => {
+            addProperty(playerEditor, null, "0 auto");
+            centerTarget();
+        },
+        () => {
+            addProperty(areaEditor, "display", "flex");
+            addProperty(areaEditor, null, "center");
+
+            centerTarget();
+        },
+        () => {
+            addProperty(areaEditor, "display");
+            addProperty(areaEditor, "place-items", "center");
+            
+            target.css({
+                "margin": "auto"
+            });
+
+        }
+    ];
+
     let currentLevel = 0;
     let win = false;
+
+
 
     function updatePlayer() {
         const pRect = player[0].getBoundingClientRect();
@@ -140,40 +163,12 @@ $(document).ready(() => {
         
         win = false;
 
-        levelDisp.text(`${level}/${levels}`);
-        progressBar.css("width", `${(level / levels) * 100}%`);
+        levelDisp.text(`${level + 1}/${levels.length}`);
+        progressBar.css("width", `${((level + 1) / levels.length) * 100}%`);
         
         currentLevel = level;
+        levels[level]();
         
-        switch(level) {
-            case 1: {
-                addProperty(playerEditor, null, "0 auto");
-
-                centerTarget();
-                break;
-            }
-
-            case 2: {
-                addProperty(areaEditor, "display", "flex");
-                addProperty(areaEditor, null, "center");
-
-                centerTarget();
-                
-                break;
-            }
-
-            case 3: {
-                addProperty(areaEditor, "display");
-                addProperty(areaEditor, "place-items", "center");
-                
-                target.css({
-                    "margin": "auto"
-                });
-
-                break;
-            }
-        }
-
         editors.forEach((e) => {
             if(e.propElements.length == 0) {
                 e.propContainer.append($("<span class='comment'>/* Empty */</span>"));
@@ -185,7 +180,7 @@ $(document).ready(() => {
     }
 
     function loadNextLevel() {
-        if(currentLevel < levels) {
+        if(currentLevel < levels.length) {
             loadLevel(currentLevel + 1);
             return true;
         }
@@ -196,7 +191,7 @@ $(document).ready(() => {
     $("#btn-prev-level").click(() => {
         if(win) return;
 
-        if(currentLevel > 1) {
+        if(currentLevel > 0) {
             loadLevel(currentLevel - 1);
         }
     });
@@ -207,5 +202,5 @@ $(document).ready(() => {
         loadNextLevel();
     });
 
-    loadLevel(1);
+    loadLevel(0);
 });
