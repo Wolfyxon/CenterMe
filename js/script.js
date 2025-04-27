@@ -16,7 +16,7 @@ $(document).ready(() => {
     const levelDisp = $("#level-disp");
     const progressBar = $(".progress-bar");
 
-    const levels = 2;
+    const levels = 3;
     let currentLevel = 0;
     let win = false;
 
@@ -119,6 +119,12 @@ $(document).ready(() => {
         return editor;
     }
 
+    function centerTarget() {
+        target.css({
+            "margin": "0 auto"
+        });
+    }
+
     function loadLevel(level) {
         editors.forEach((e) => {
             e.propContainer.empty();
@@ -143,10 +149,7 @@ $(document).ready(() => {
             case 1: {
                 addProperty(playerEditor, null, "0 auto");
 
-                target.css({
-                    "margin": "0 auto"
-                });
-
+                centerTarget();
                 break;
             }
 
@@ -154,10 +157,19 @@ $(document).ready(() => {
                 addProperty(areaEditor, "display", "flex");
                 addProperty(areaEditor, null, "center");
 
-                target.css({
-                    "margin": "0 auto"
-                });
+                centerTarget();
                 
+                break;
+            }
+
+            case 3: {
+                addProperty(areaEditor, "display");
+                addProperty(areaEditor, "place-items", "center");
+                
+                target.css({
+                    "margin": "auto"
+                });
+
                 break;
             }
         }
