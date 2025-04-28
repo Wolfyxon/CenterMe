@@ -113,6 +113,9 @@ $(document).ready(() => {
         const propInp = $(`<input type="text" value="${property ?? ""}" class="editor-property" placeholder="Property..." ${pEnd}>`);
         const valInp = $(`<input type="text" class="editor-value" value="${value ?? ""}" placeholder="Value..." ${vEnd}>`);
 
+        if(property) propInp.addClass("locked");
+        if(value) valInp.addClass("locked");
+
         propInp.on("input propertychange", update);
         valInp.on("input propertychange", update);
 
