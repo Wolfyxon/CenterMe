@@ -49,6 +49,17 @@ $(document).ready(() => {
             target.css({
                 "margin": "auto 0"
             });
+        },
+        () => {
+            resetDimensions(target);
+            resetDimensions(player);
+
+            addProperty(playerEditor, "position");
+            addProperty(playerEditor, null, 0);
+
+            target.css({
+                "right": "0"
+            });
         }
     ];
 
@@ -99,7 +110,13 @@ $(document).ready(() => {
         const props = editor.propElements;
         const vals = editor.valElements;
 
-        editor.target.removeAttr("style");
+        //editor.target.removeAttr("style");
+
+        editor.lastProps.forEach((prop) => {
+            editor.target.css(prop, "");
+        });
+
+        editor.lastProps = [];
 
         props.forEach((prop, i) => {
             const val = vals[i];
@@ -108,6 +125,7 @@ $(document).ready(() => {
             if(!prop.val()) return;
 
             editor.target.css(prop.val(), val.val());
+            editor.lastProps.push(prop.val());
         });
     }
 
@@ -149,6 +167,7 @@ $(document).ready(() => {
             target: target,
             element: main,
             propContainer: main.find(".editor-properties"),
+            lastProps: [],
             propElements: [],
             valElements: []
         }
@@ -162,6 +181,15 @@ $(document).ready(() => {
     function centerTarget() {
         target.css({
             "margin": "0 auto"
+        });
+    }
+
+    function resetDimensions(elm) {
+        elm.css({
+            "top": "unset !important",
+            "bottom": "unset !important",
+            "left": "unset !important",
+            "right": "unset !important"
         });
     }
 
@@ -219,5 +247,5 @@ $(document).ready(() => {
         loadNextLevel();
     });
 
-    loadLevel(0);
+    loadLevel(5);
 });
