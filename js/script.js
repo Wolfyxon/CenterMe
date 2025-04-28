@@ -136,14 +136,14 @@ $(document).ready(() => {
         let pEnd = "";
         let vEnd = "";
 
-        if(property) pEnd = "disabled";
-        if(value) vEnd = "disabled";
+        if(property != null) pEnd = "disabled";
+        if(value != null) vEnd = "disabled";
 
         const propInp = $(`<input type="text" value="${property ?? ""}" class="editor-property" placeholder="Property..." ${pEnd}>`);
         const valInp = $(`<input type="text" class="editor-value" value="${value ?? ""}" placeholder="Value..." ${vEnd}>`);
 
-        if(property) propInp.addClass("locked");
-        if(value) valInp.addClass("locked");
+        if(property != null) propInp.addClass("locked");
+        if(value != null) valInp.addClass("locked");
 
         propInp.on("input propertychange", update);
         valInp.on("input propertychange", update);
