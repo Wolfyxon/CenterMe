@@ -249,5 +249,5 @@ $(document).ready(() => {
         loadNextLevel();
     });
 
-    loadLevel(5);
+    loadLevel(0);
 });
