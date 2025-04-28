@@ -14,6 +14,7 @@ $(document).ready(() => {
     const areaEditor = addEditor(area, "#area");
 
     const levelDisp = $("#level-disp");
+    const progress = $(".progress");
     const progressBar = $(".progress-bar");
 
     const levels = [
@@ -213,6 +214,7 @@ $(document).ready(() => {
 
         levelDisp.text(`${level + 1}/${levels.length}`);
         progressBar.css("width", `${((level + 1) / levels.length) * 100}%`);
+        progress.attr("area-valuenow", level + 1);
         
         currentLevel = level;
         levels[level]();
@@ -250,5 +252,6 @@ $(document).ready(() => {
         loadNextLevel();
     });
 
+    progress.attr("aria-valuemax", levels.length);
     loadLevel(0);
 });
