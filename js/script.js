@@ -51,7 +51,6 @@ $(document).ready(() => {
             });
         },
         () => {
-            resetDimensions(target);
             resetDimensions(player);
 
             addProperty(playerEditor, "position");
@@ -60,7 +59,9 @@ $(document).ready(() => {
             
             target.css({
                 "right": "0",
-                "bottom": "0"
+                "bottom": "0",
+                "top": "unset",
+                "left": "unset"
             });
         }
     ];
@@ -188,10 +189,10 @@ $(document).ready(() => {
 
     function resetDimensions(elm) {
         elm.css({
-            "top": "unset !important",
-            "bottom": "unset !important",
-            "left": "unset !important",
-            "right": "unset !important"
+            "top": "unset",
+            "bottom": "unset",
+            "left": "unset",
+            "right": "unset"
         });
     }
 
