@@ -42,6 +42,14 @@ $(document).ready(() => {
                 "margin": "auto"
             });
         },
+        () => {
+            addProperty(areaEditor, "display");
+            addProperty(areaEditor, null, "center");
+
+            target.css({
+                "margin": "auto 0"
+            });
+        }
     ];
 
     let currentLevel = 0;
