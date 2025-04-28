@@ -56,9 +56,11 @@ $(document).ready(() => {
 
             addProperty(playerEditor, "position");
             addProperty(playerEditor, null, 0);
-
+            addProperty(playerEditor, null, 0);
+            
             target.css({
-                "right": "0"
+                "right": "0",
+                "bottom": "0"
             });
         }
     ];
