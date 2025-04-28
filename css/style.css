@@ -1,3 +1,7 @@
+html, body {
+    height: 100%;
+}
+
 body {
     text-align: center;
     background-color: var(--bs-body-color);
