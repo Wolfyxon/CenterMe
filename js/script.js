@@ -221,7 +221,7 @@ $(document).ready(() => {
         
         editors.forEach((e) => {
             if(e.propElements.length == 0) {
-                e.propContainer.append($("<span class='comment'>/* Empty */</span>"));
+                e.propContainer.append($("<span class='text-secondary'>/* Empty */</span>"));
             }
         });
 
